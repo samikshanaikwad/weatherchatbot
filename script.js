@@ -1,9 +1,3 @@
-// ==== Voiceflow Credentials ====
-// These are loaded from the config.js file.
-const API_KEY = typeof VOICEFLOW_API_KEY !== 'undefined' ? VOICEFLOW_API_KEY : '';
-const VERSION_ID = typeof VOICEFLOW_VERSION_ID !== 'undefined' ? VOICEFLOW_VERSION_ID : '';
-// ===============================
-
 const USER_ID = "user_" + Math.random().toString(36).substr(2, 9);
 
 const chat = document.getElementById("chat");
@@ -111,18 +105,19 @@ async function sendMessage() {
 async function interact(action) {
   toggleTypingIndicator(true);
   try {
-    const res = await fetch(
-      `https://general-runtime.voiceflow.com/state/user/${USER_ID}/interact`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: API_KEY,
-          "Content-Type": "application/json",
-          versionID: VERSION_ID
-        },
-        body: JSON.stringify({ action })
-      }
-    );
+    const res = await fetch('/api/interact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ action, userId: USER_ID }),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.error || `Request failed with status ${res.status}`);
+    }
+
     const data = await res.json();
     toggleTypingIndicator(false);
     await handleTraces(data);
