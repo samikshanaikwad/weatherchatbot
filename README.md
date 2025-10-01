@@ -48,7 +48,8 @@ The logic and flow for Clima were designed in **Voiceflow**.
 
 ## 📬 Feedback
 Would love to hear your feedback and suggestions!  
-Feel free to raise an issue or connect with me on [LinkedIn](www.linkedin.com/in/samiksha-naikwad16)  
+Feel free to raise an issue or connect with me on LinkedIn.  
+👉 (www.linkedin.com/in/samiksha-naikwad16)  
 
 ---
 
